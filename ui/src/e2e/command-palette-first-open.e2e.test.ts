@@ -29,7 +29,10 @@ suite.define(() => {
         await shell.waitFor({ state: "visible" });
         await paletteModule.request;
         expect(await shell.getAttribute("aria-label")).toBe("Loading…");
-        expect(await page.locator(".lazy-view-state--loading").count()).toBe(0);
+        // The route behind the palette may still be loading independently.
+        expect(await page.locator(".cmd-palette-overlay .lazy-view-state--loading").count()).toBe(
+          0,
+        );
 
         paletteModule.release();
         await page.locator(".cmd-palette__input:not([disabled])").waitFor({ state: "visible" });
