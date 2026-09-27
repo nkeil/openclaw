@@ -375,7 +375,6 @@ src/config/env-substitution.ts
 src/config/env-vars.ts
 src/config/future-version-guard.ts
 src/config/gateway-control-ui-origins.ts
-src/config/gateway-defaults.ts
 src/config/gateway-env-selection.ts
 src/config/gateway-portal-ingress.ts
 src/config/gateway-public-origin.ts

@@ -388,11 +388,6 @@ export function renderNumberInput(params: ConfigNodeRenderParams): TemplateResul
   const errorId = configFieldId(path, "scalar-error");
   const displayValue = value ?? (params.compact ? schema.default : undefined) ?? "";
   const effectiveValue = value !== undefined ? value : schema.default;
-  const placeholder =
-    hintForPath(path, hints)?.placeholder ??
-    (schema.default !== undefined
-      ? t("configForm.defaultValue", { value: formatConfigValueText(schema.default) })
-      : undefined);
   const constraints = numericInputConstraints(schema);
   const numericStep = typeof constraints.step === "number" ? constraints.step : 1;
   const controlIdentity = params.controlIdentity ?? params.sourceIdentity ?? value;
@@ -464,7 +459,12 @@ export function renderNumberInput(params: ConfigNodeRenderParams): TemplateResul
       aria-label=${label}
       aria-describedby=${[helpId, errorId].filter(Boolean).join(" ")}
       aria-invalid="false"
-      placeholder=${params.compact || schema.default !== undefined ? (placeholder ?? nothing) : nothing}
+      placeholder=${
+        hintForPath(path, hints)?.placeholder ??
+        (schema.default !== undefined
+          ? t("configForm.defaultValue", { value: formatConfigValueText(schema.default) })
+          : nothing)
+      }
       min=${constraints.min ?? nothing}
       max=${constraints.max ?? nothing}
       step=${constraints.step}
@@ -539,7 +539,7 @@ export function renderNumberInput(params: ConfigNodeRenderParams): TemplateResul
 
   return renderFieldRow({
     ...field,
-    defaultDescription: renderSchemaDefaultDescription(schema, value, placeholder),
+    defaultDescription: renderSchemaDefaultDescription(schema, value),
     control,
     errorId,
   });

@@ -77,7 +77,6 @@ export {
   ConfigReadOnlyError,
   NixModeConfigMutationError,
 } from "./config-write-guard.js";
-export { DEFAULT_GATEWAY_PORT } from "./gateway-defaults.js";
 export * from "./paths.js";
 export * from "./recovery-policy.js";
 export * from "./runtime-overrides.js";

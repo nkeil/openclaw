@@ -110,12 +110,10 @@ describe("inherited defaults", () => {
     const { uiHints } = buildConfigSchemaCore();
     expect(uiHints["cron.enabled"]?.placeholder).toBe("Default: On");
     expect(uiHints["plugins.enabled"]?.placeholder).toBe("Default: On");
-    expect(uiHints["gateway.port"]?.placeholder).toBe("Default: 18789");
 
-    const config = OpenClawSchema.parse({ cron: {}, plugins: {}, gateway: {} });
+    const config = OpenClawSchema.parse({ cron: {}, plugins: {} });
     expect(config.cron).not.toHaveProperty("enabled");
     expect(config.plugins).not.toHaveProperty("enabled");
-    expect(config.gateway).not.toHaveProperty("port");
   });
 });
 
